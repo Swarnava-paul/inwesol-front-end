@@ -19,13 +19,17 @@ interface appStateType {
     blogs : BlogsType[],
     filter : string,
     currentPageNumber:number,
+    blogsContainer:BlogsType[],
+    blogsLengthContainer:number
 };
 
 const initialState : appStateType =  {
     blogsTotalLength : 0,
+    blogsLengthContainer:0,
     blogs:[],
     filter : 'love',
-    currentPageNumber : 0
+    currentPageNumber : 0,
+    blogsContainer:[]
 };
 
 const appSlice = createSlice({
@@ -45,8 +49,17 @@ const appSlice = createSlice({
          setBlogs : (state,action:PayloadAction<BlogsType[]>) => {
               state.blogs = action.payload;
          },
+         setBlogsContainer : (state,action:PayloadAction<BlogsType[]>) => {
+              state.blogsContainer = action.payload;
+         },
+         setBlogsLengthContainer:(state,action:PayloadAction<number>) => {
+              state.blogsLengthContainer = action.payload;
+         }
     }
 });
 
-export const {setCurrentPageNumber,setFilter,setBlogsLength,setBlogs} = appSlice.actions;
+export const {setCurrentPageNumber,setFilter,setBlogsLength,setBlogs,
+setBlogsContainer,
+setBlogsLengthContainer
+} = appSlice.actions;
 export default appSlice.reducer;

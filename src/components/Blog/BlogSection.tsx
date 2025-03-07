@@ -3,17 +3,16 @@ import { Grid} from '@chakra-ui/react';
 import BlogCart from './BlogCart';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
-import { setBlogsLength , setBlogs } from '../../redux/slice';
+import { setBlogsLength , setBlogs , setBlogsContainer , setBlogsLengthContainer} from '../../redux/slice';
 
 
 const BlogSection:React.FC = () => {
 
-    const blogs = useAppSelector((state)=>state.app.blogs);
+    const blogs = useAppSelector((state)=>state.app.blogsContainer);
     const currentPageNumber = useAppSelector((state)=>state.app.currentPageNumber);
-    const filter = useAppSelector((state)=>state.app.filter);
     const [loading,setLoading] = useState<boolean>(false);
     const dispatch = useAppDispatch();
-    const Uri = import.meta.env.VITE_BLOG_BASE_URI;
+    const Uri = import.meta.env.VITE_BLOG_BASE_URI
  
     async function fetchBlogs() {
        setLoading(true);
@@ -24,7 +23,9 @@ const BlogSection:React.FC = () => {
          }
          const response1 = await fetch(`${Uri}?limit=10&skip=${skip}`);
          const response2 = await response1.json();
-         dispatch(setBlogsLength(response2.total))
+         dispatch(setBlogsLength(response2.total));
+         dispatch(setBlogsContainer(response2.posts));
+         dispatch(setBlogsLengthContainer(response2.total))
          dispatch(setBlogs(response2.posts))
       }catch(err) {
         //
@@ -36,8 +37,8 @@ const BlogSection:React.FC = () => {
 
     useEffect(()=>{
        fetchBlogs();
-       window.scrollTo({top:50,behavior:'smooth'})
-    },[currentPageNumber, filter]);
+       window.scrollTo({top:0,behavior:'smooth'})
+    },[currentPageNumber]);
 
   return (
    <Grid mt='20' 

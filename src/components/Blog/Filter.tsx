@@ -1,12 +1,28 @@
 import {Button , Text , Box } from "@chakra-ui/react";
-import { setFilter } from "../../redux/slice";
+import { setFilter ,setBlogsContainer,setBlogsLength,setCurrentPageNumber} from "../../redux/slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useState } from "react";
  
 const Filter:React.FC = () => {
     
-     const categories = ['love','magic','american','history','life'];
+     const categories = ['All','love','magic','american','history','life'];
      const filter = useAppSelector((state)=>state.app.filter);
      const dispatch = useAppDispatch();
+     const blogs = useAppSelector((state)=>state.app.blogs);
+     const blogsLength = useAppSelector((state)=>state.app.blogsLengthContainer);
+
+     function filterPosts(category:string) {
+         if(category === 'All') {
+            dispatch(setBlogsContainer(blogs));
+            dispatch(setBlogsLength(blogsLength));
+            dispatch(setCurrentPageNumber(0))
+            return;
+         }
+         const filteredPosts = blogs.filter((post)=>post.tags.includes(category));
+         dispatch(setBlogsLength(filteredPosts.length))
+         dispatch(setCurrentPageNumber(0))
+         dispatch(setBlogsContainer(filteredPosts));
+     }
 
   return (
     <>
@@ -24,7 +40,10 @@ const Filter:React.FC = () => {
             bg={filter === category ? 'rgb(93, 0, 255)' : 'rgb(54, 53, 55)'}
             border='none'
             borderRadius={30}
-            onClick={()=> dispatch(setFilter(category))}>
+            onClick={()=> {
+              dispatch(setFilter(category));
+              filterPosts(category);
+            }}>
             {category}
             </Button>
         ))}
