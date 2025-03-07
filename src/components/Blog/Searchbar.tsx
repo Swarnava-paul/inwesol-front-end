@@ -1,10 +1,16 @@
 import { Button , Flex} from "@chakra-ui/react"
 import { useState } from "react"
-
+import useFetchBlogs from "../../hooks/FetchBlogs";
 const Searchbar:React.FC = () => {
  
      const [searchTerm,setSearchTerm] = useState<string>('');
+     const {fetchPosts} = useFetchBlogs();
      
+     function helperOfSettingFetchPost(){
+         const uri = import.meta.env.VITE_BLOG_BASE_URI;
+         fetchPosts(`${uri}/search?q=${searchTerm}`); 
+     }
+
   return (
     <Flex mt={10} w={['90%','80%','80%','60%']} h='6vh'>
        <input type="search" className="search-bar-input" style={{
@@ -23,6 +29,9 @@ const Searchbar:React.FC = () => {
        borderTopLeftRadius='none'
        borderBottomLeftRadius='none' 
        height='100%'
+       onClick={()=>{
+        helperOfSettingFetchPost();
+       }}
        >Search</Button>
     </Flex>
   )

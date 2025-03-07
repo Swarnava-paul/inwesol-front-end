@@ -8,7 +8,7 @@ const Filter:React.FC = () => {
      const categories = ['All','love','magic','american','history','life'];
      const filter = useAppSelector((state)=>state.app.filter);
      const dispatch = useAppDispatch();
-     const {loading,error,fetchPosts} = useFetchBlogs();
+     const {fetchPosts} = useFetchBlogs();
      const uri = import.meta.env.VITE_BLOG_BASE_URI;
 
      function categoryWiseFetchPosts (category:string) {
