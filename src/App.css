@@ -1,0 +1,15 @@
+@media only screen and (max-width: 700px) {
+    .search-bar-input{
+        font-size: 11px;
+    }
+  }
+
+::-webkit-scrollbar{
+    background:RGB(32, 32, 32);
+    width: 10px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(116, 114, 114);
+    border-radius: 30px;
+    height: 10px;
+}

@@ -1,9 +1,10 @@
 import { Button , Flex} from "@chakra-ui/react"
 
 const Searchbar:React.FC = () => {
+
   return (
-    <Flex mt={10} w={['90%','80%','80%','60%']} h='8vh'>
-       <input type="search" style={{
+    <Flex mt={10} w={['90%','80%','80%','60%']} h='6vh'>
+       <input type="search" className="search-bar-input" style={{
        outline:"none",
        borderTopLeftRadius:"5px",
        borderBottomLeftRadius:"5px",
