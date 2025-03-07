@@ -1,27 +1,22 @@
 import {Button , Text , Box } from "@chakra-ui/react";
-import { setFilter ,setBlogsContainer,setBlogsLength,setCurrentPageNumber} from "../../redux/slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { useState } from "react";
+import { setFilter } from "../../redux/slice";
+import useFetchBlogs from "../../hooks/FetchBlogs";
  
 const Filter:React.FC = () => {
     
      const categories = ['All','love','magic','american','history','life'];
      const filter = useAppSelector((state)=>state.app.filter);
      const dispatch = useAppDispatch();
-     const blogs = useAppSelector((state)=>state.app.blogs);
-     const blogsLength = useAppSelector((state)=>state.app.blogsLengthContainer);
+     const {loading,error,fetchPosts} = useFetchBlogs();
+     const uri = import.meta.env.VITE_BLOG_BASE_URI;
 
-     function filterPosts(category:string) {
-         if(category === 'All') {
-            dispatch(setBlogsContainer(blogs));
-            dispatch(setBlogsLength(blogsLength));
-            dispatch(setCurrentPageNumber(0))
-            return;
+     function categoryWiseFetchPosts (category:string) {
+         if (category === 'All'){
+          fetchPosts(uri);
+          return;
          }
-         const filteredPosts = blogs.filter((post)=>post.tags.includes(category));
-         dispatch(setBlogsLength(filteredPosts.length))
-         dispatch(setCurrentPageNumber(0))
-         dispatch(setBlogsContainer(filteredPosts));
+         fetchPosts(`${uri}/tag/${category}`);
      }
 
   return (
@@ -42,7 +37,7 @@ const Filter:React.FC = () => {
             borderRadius={30}
             onClick={()=> {
               dispatch(setFilter(category));
-              filterPosts(category);
+              categoryWiseFetchPosts(category);
             }}>
             {category}
             </Button>

@@ -1,44 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Grid} from '@chakra-ui/react';
 import BlogCart from './BlogCart';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hook';
-import { setBlogsLength , setBlogs , setBlogsContainer , setBlogsLengthContainer} from '../../redux/slice';
+import { useAppSelector } from '../../redux/hook';
+import useFetchBlogs from '../../hooks/FetchBlogs';
 
 
 const BlogSection:React.FC = () => {
 
     const blogs = useAppSelector((state)=>state.app.blogsContainer);
-    const currentPageNumber = useAppSelector((state)=>state.app.currentPageNumber);
-    const [loading,setLoading] = useState<boolean>(false);
-    const dispatch = useAppDispatch();
-    const Uri = import.meta.env.VITE_BLOG_BASE_URI
- 
-    async function fetchBlogs() {
-       setLoading(true);
-      try {
-         let skip = (10*currentPageNumber-10)
-         if(skip < 0) {
-          skip = 0
-         }
-         const response1 = await fetch(`${Uri}?limit=10&skip=${skip}`);
-         const response2 = await response1.json();
-         dispatch(setBlogsLength(response2.total));
-         dispatch(setBlogsContainer(response2.posts));
-         dispatch(setBlogsLengthContainer(response2.total))
-         dispatch(setBlogs(response2.posts))
-      }catch(err) {
-        //
-        console.log(err)
-      }finally{
-        setLoading(false)
-      }
-    }
+    const {loading,error,fetchPosts} = useFetchBlogs(); // custom hook for fetching posts
 
     useEffect(()=>{
-       fetchBlogs();
+       fetchPosts();
        window.scrollTo({top:0,behavior:'smooth'})
-    },[currentPageNumber]);
+    },[]);
 
   return (
    <Grid mt='20' 
