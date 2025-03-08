@@ -19,13 +19,14 @@ const Pagination = () => {
   function paginate(e:Event)  {
     window.scrollTo({top:0,behavior:"smooth"})
     const skip = Math.floor(10*e.page-10)
+    
     if(skip <= 0) {
-       //const limitPost = blogs.filter((i)=> i.id >= 1 && i.id <= 10);
+
        const limitPost = blogs.slice(1,10);
        dispatch(setBlogsContainer(limitPost))
     }else {
-      //const limitPost = blogs.filter((i)=>i.id >= skip+1 && i.id <= skip*2);
-      const limitPost = blogs.slice(skip+1,skip*2);
+
+      const limitPost = blogs.slice(skip+1,skip+10);
       dispatch(setBlogsContainer(limitPost))
     }
     
