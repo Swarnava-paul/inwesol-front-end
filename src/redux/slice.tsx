@@ -23,13 +23,14 @@ interface appStateType {
     blogsLengthContainer:number
 };
 
+// Initial state for the app slice
 const initialState : appStateType =  {
-    blogsTotalLength : 0,
-    blogsLengthContainer:0,
-    blogs:[],
-    filter : 'love',
-    currentPageNumber : 0,
-    blogsContainer:[]
+     blogsTotalLength : 0,
+     blogsLengthContainer: 0,
+     blogs: [],
+     filter : 'love', // Default filter value
+     currentPageNumber : 0,
+     blogsContainer: []
 };
 
 const appSlice = createSlice({

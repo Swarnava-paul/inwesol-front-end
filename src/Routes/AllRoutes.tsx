@@ -1,7 +1,7 @@
 import React from "react";
 import { Suspense } from "react";
 import { Routes , Route  } from "react-router-dom";
-//pages
+//pages lazy loaded for better loading performance
 const Blog = React.lazy(()=> import('../pages/Blog'));
 const Contact = React.lazy(()=>import('../pages/Contact'));
 

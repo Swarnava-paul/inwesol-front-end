@@ -3,7 +3,8 @@ import dummyimage from '../../assets/dummyimage.jpeg'
 import { BlogsType } from '../../redux/slice';
 
 interface BlogCart {
-  item  : BlogsType
+  // Define the item prop with the type BlogsType
+  item: BlogsType
 }
 
 const BlogCart:React.FC<BlogCart> = ({item}) => {

@@ -9,7 +9,8 @@ const Filter:React.FC = () => {
      const filter = useAppSelector((state)=>state.app.filter);
      const dispatch = useAppDispatch();
      const {fetchPosts} = useFetchBlogs();
-     const uri = import.meta.env.VITE_BLOG_BASE_URI;
+    // Get the base URI for fetching blogs from environment variables
+    const uri = import.meta.env.VITE_BLOG_BASE_URI; 
 
      function categoryWiseFetchPosts (category:string) {
          if (category === 'All'){

@@ -16,6 +16,13 @@ const Pagination = () => {
   const vlogsCount = blogs.length
   type Event = {page:number}
 
+  /** Handles pagination by scrolling to the top of the page and updating the displayed blogs
+    
+    The function calculates the number of items to skip based on the current page number.
+    If the skip value is less than or equal to 0, it slices the first 10 items from the blogs array.
+    Otherwise, it slices the next set of 10 items starting from the calculated skip value.
+    The sliced items are then dispatched to update the blogs container.
+   */
   function paginate(e:Event)  {
     window.scrollTo({top:0,behavior:"smooth"})
     const skip = Math.floor(10*e.page-10)

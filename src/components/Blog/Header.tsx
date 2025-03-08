@@ -1,9 +1,10 @@
 import {Text , Box} from "@chakra-ui/react"
-
+import { Link } from "react-router-dom"
 const Header = () => {
   return (
     <>
-    <Text color='white' ml='70%'>Contact Us</Text>
+    <Text color='white' ml='70%'><Link to='/contact'>Contact Us</Link></Text>
+    {/* Container for the header text */}
     <span style={{
     display:'flex',
     gap:'10px',
@@ -12,7 +13,9 @@ const Header = () => {
     fontWeight:'400',
     alignItems:'center'
     }}>
+    {/* Main header text */}
     <Text fontSize={'4xl'} color='white'>Explore Our</Text>
+    {/* Highlighted header text */}
     <Text fontSize={'4xl'} color='rgb(93, 0, 255)'>Blogs</Text>
     </span>
     <Box w='320px' 

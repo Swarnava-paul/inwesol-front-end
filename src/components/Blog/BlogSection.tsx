@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid , Text} from '@chakra-ui/react';
 import BlogCart from './BlogCart';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import { useAppSelector } from '../../redux/hook';
 import useFetchBlogs from '../../hooks/FetchBlogs';
 
@@ -12,10 +12,12 @@ const BlogSection:React.FC = () => {
     const mainBlogsContainer = useAppSelector((state)=>state.app.blogs);
     const {loading,fetchPosts} = useFetchBlogs(); // custom hook for fetching posts
 
+    // useEffect hook to fetch posts and scroll to top on component mount
     useEffect(()=>{
-       fetchPosts();
-       window.scrollTo({top:0,behavior:'smooth'})
+       fetchPosts(); // Fetch posts when the component mounts
+       window.scrollTo({top:0,behavior:'smooth'}) // Smooth scroll to top
     },[]);
+
 
   return (
     loading == true ? (

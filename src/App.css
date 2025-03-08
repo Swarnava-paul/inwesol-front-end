@@ -13,3 +13,11 @@
     border-radius: 30px;
     height: 10px;
 }
+
+.form-input{
+    color:black;
+    height: 6vh;
+}
+.Error-text-form{
+  color:red
+}
