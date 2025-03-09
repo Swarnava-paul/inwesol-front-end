@@ -1,8 +1,11 @@
-import {Text , Box} from "@chakra-ui/react"
+import {Text , Box,Button} from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 const Header = () => {
   return (
     <>
+     <Button bg='rgb(69, 69, 216)'>
+     <a href="https://github.com/Swarnava-paul/inwesol-front-end">View Github Repo</a>
+     </Button>
     <Text color='white' ml='70%'><Link to='/contact'>Contact Us</Link></Text>
     {/* Container for the header text */}
     <span style={{
