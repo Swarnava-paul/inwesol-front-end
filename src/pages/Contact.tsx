@@ -1,6 +1,5 @@
 import { Grid , Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { RiGitBranchFill } from "react-icons/ri";
 
 
 const Contact:React.FC = () => {
@@ -26,7 +25,7 @@ const Contact:React.FC = () => {
 
 
   
-    function validateForm(e) {
+    function validateForm(e:React.FormEvent<HTMLFormElement>) {
       const formData = new FormData(e.currentTarget);
       const data = Object.fromEntries(formData.entries());
       let obj = {...error};
@@ -42,6 +41,12 @@ const Contact:React.FC = () => {
       };
       setError(obj);
     };
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      console.log(data);
+    }
 
 
   return (
@@ -52,8 +57,7 @@ const Contact:React.FC = () => {
           validateForm(e);
         }}
         onSubmit={(e)=>{
-         
-          //handleForm(e)
+         handleSubmit(e);
         }}>
         <Text textAlign='center' fontSize='2xl' fontFamily='sans-serif'>Contact Us</Text>
         <Text>Fill this form we will contact you to solve you specific query</Text>

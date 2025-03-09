@@ -1,54 +1,32 @@
-# React + TypeScript + Vite
+# Blog listing assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Tech Stack
 
-Currently, two official plugins are available:
+  1. React
+  2. TypeScript
+  3. Redux
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Reason Behind choose Typescript with React
 
-## Expanding the ESLint configuration
+ -> React is a very good Javascript Library but react is struggled with typing in component props
+ or state props or even data comes from api .
+ so with the help of Typescript + React (tsx) we are able to acheive the static / strict type in our application
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Reason Behind choose Redux
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+ -> react state and also context api gives us the power of state to use any component but for contralized
+ data container system we need to use Redux that gives us a central container of our all important states
+ and as well as gives us the power to update the states by using actions functions.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# Major Performance Optimizations technique used
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+-> i use React code splitting concept to ensure application performance and improve the website loading time
+
+   with the help of react lazy loading and suspense hook this is possible. if we setup our application pages
+   without lazy loading all pages and all components related to those pages are download in client side 
+   this increase loading time of our application as well as waste the client bandwidth.
+
+   with the help of lazy loading pages are only download in client side when client request that page
+   this is calls (demand paging).
+
